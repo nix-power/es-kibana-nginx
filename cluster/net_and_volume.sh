@@ -2,7 +2,7 @@
 
 # Create internal network and volumes for the cluster
 
-docker network inspect --format {{.Name}} 2>/dev/null | grep esnet
+docker network inspect esnet --format {{.Name}} 2>/dev/null | grep esnet
 if [[ $? -ne 0 ]]; then
   docker network create --driver bridge --subnet 10.212.0.0/28 esnet
 fi
