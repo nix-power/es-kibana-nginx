@@ -39,7 +39,7 @@ services:
     hostname: es2
 
   kibana:
-    image: docker.elastic.co/kibana/kibana:6.1.2
+    image: docker.elastic.co/kibana/kibana-oss:6.1.2
     depends_on:
       - elasticsearch
       - elasticsearch2
