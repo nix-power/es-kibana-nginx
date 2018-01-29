@@ -1,0 +1,76 @@
+version: '2'
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.1.2
+    container_name: es1
+    volumes:
+      - ./conf/es/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+      - es1-data:/usr/share/elasticsearch/data
+    environment:
+      - cluster.name=esops
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - 9200:9200
+    networks:
+      - esnet
+    hostname: es1
+  elasticsearch2:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.1.2
+    container_name: es2
+    volumes:
+      - ./conf/es/elasticsearch2.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+      - es2-data:/usr/share/elasticsearch/data
+    environment:
+      - cluster.name=esops
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "discovery.zen.ping.unicast.hosts=elasticsearch"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    networks:
+      - esnet
+    hostname: es2
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:6.1.2
+    depends_on:
+      - elasticsearch
+      - elasticsearch2
+    container_name: kibana1-backend
+    networks:
+      - esnet
+    hostname: kibana1-backend
+    volumes:
+      - ./conf/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml:ro
+
+  web:
+    image: nginx
+    depends_on:
+      - elasticsearch
+      - elasticsearch2
+      - kibana
+    container_name: web1
+    ports:
+      - 80:80
+    networks:
+      - esnet
+    hostname: web1
+    volumes:
+      - ./conf/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+
+volumes:
+  es1-data:
+    external: true
+  es2-data:
+    external: true
+
+networks:
+  esnet:
+    external: true
