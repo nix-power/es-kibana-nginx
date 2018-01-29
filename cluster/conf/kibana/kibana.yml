@@ -19,7 +19,6 @@ server.name: "kibana1.localdomain"
 
 # The URL of the Elasticsearch instance to use for all your queries.
 elasticsearch.url: "http://es1:9200"
-xpack.security.enabled: false
 
 # When this setting's value is true Kibana uses the hostname specified in the server.host
 # setting. When the value of this setting is false, Kibana uses the hostname of the host
