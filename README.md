@@ -1,7 +1,7 @@
 # es-kibana-nginx
 <img src="https://user-images.githubusercontent.com/3180706/35538255-ce76c6e6-0555-11e8-98fb-9810f0259bae.png" width="90%"></img> 
 
-Two node Elasticsearch cluster (6.1.2) , with kibana (6.1.2) frontend and nginx.
+Two node Elasticsearch cluster (6.1.2) , with kibana-oss (6.1.2) frontend and nginx.
 Docker-based deployment.
 
 
