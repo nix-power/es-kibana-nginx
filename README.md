@@ -20,6 +20,10 @@ It will also create following aliases to check elasticsearch cluster
     escluster:  prerry output JSON with the state of elasticsearch cluster.
     esstat:     short output showing cluster state.
     esindex:    list elasticsearch indexes.
+    
+To use them relogin, or
+    
+    source ~/.bashrc
 
 elasticsearch will listen on 0.0.0.0:9200 (bridged to docker network)
 kibana will not be accesible from outside: all requests will be proxied to it by nginx.
