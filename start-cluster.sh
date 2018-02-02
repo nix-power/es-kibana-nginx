@@ -14,15 +14,13 @@ check_curl() {
 }
 
 check_docker() {
-  test -x $(which docker)
-
+  which docker
   if [[ $? -ne 0 ]]; then
     add_docker_repo
     install_docker
   fi
 
-   test -x $(which docker-compose)
-
+   which docker-compose
    if [[ $? -ne 0 ]]; then
      install_docker_compose
    fi
