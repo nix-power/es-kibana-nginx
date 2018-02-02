@@ -87,7 +87,7 @@ main() {
     echo "elasticsearch cluster is ready. You can acceess it via http://${INTERNALIP} or http://${SERVER_NAME}."
 
     echo 'Attention: it takes up to 5 minutes to kibana frontend to start, so don`t afraid of 502 Nginx error in first minutes'
-    echo 'To check status of kibana frontend execute: docker-compose -f cluster/docker-compose.yaml logs --f -tail='15' kibana'
+    echo 'To check status of kibana frontend execute: docker-compose -f cluster/docker-compose.yaml logs -f --tail='15' kibana'
     echo 'To check health of your cluster run esstat or escluster coomand'
     echo 'To see all indexes in elasticsearch use esindex command'
     exit $OK
