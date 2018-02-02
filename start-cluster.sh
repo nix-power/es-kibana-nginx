@@ -67,7 +67,7 @@ main() {
   sysctl -w vm.max_map_count=262144
   grep 'max_map_count\s*=\s*262144' /etc/sysctl.conf
   if [[ $? -ne 0 ]]; then
-    echo 'vm.max_map_count = 262144' > /etc/sysctl.conf
+    echo 'vm.max_map_count = 262144' >> /etc/sysctl.conf
   fi
     
   
