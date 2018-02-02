@@ -63,6 +63,14 @@ main() {
   
   check_docker
   create_volumes_and_net
+  # Set kernel parameters for max_map: for elasticsearch.
+  sysctl -w vm.max_map_count=262144
+  grep 'max_map_count\s*=\s*262144' /etc/sysctl.conf
+  if [[ $? -ne 0 ]]; then
+    echo 'vm.max_map_count = 262144' > /etc/sysctl.conf
+  fi
+    
+  
   cd cluster && docker-compose up -d
 
   if [[ $? -eq 0 ]]; then
